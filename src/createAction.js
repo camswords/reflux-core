@@ -59,7 +59,9 @@ export default function createAction(definition) {
 
     _.extend(functor, childActions, context);
 
-    Keep.createdActions.push(functor);
+    if (!definition.dontKeep) {
+      Keep.createdActions.push(functor);
+    }
 
     return functor;
 

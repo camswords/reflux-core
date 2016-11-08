@@ -18,6 +18,16 @@ describe('with the keep reset', function() {
         });
     });
 
+    describe('when an action is created and requested not to be kept', function() {
+        beforeEach(function () {
+            Reflux.createAction({ dontKeep: true });
+        });
+
+        it('should not be in the keep', function() {
+            assert.equal(Reflux.__keep.createdActions.length, 0);
+        });
+    });
+
     describe('when a store is created', function() {
         var store;
 
@@ -27,6 +37,16 @@ describe('with the keep reset', function() {
 
         it('should be in the keep', function() {
             assert.equal(Reflux.__keep.createdStores[0], store);
+        });
+    });
+
+    describe('when a store is created and requested not to be kept', function() {
+        beforeEach(function () {
+            Reflux.createStore({ init: function() { /* no-op */}, dontKeep: true });
+        });
+
+        it('should not be in the keep', function() {
+            assert.equal(Reflux.__keep.createdStores.length, 0);
         });
     });
 });

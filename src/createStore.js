@@ -58,7 +58,10 @@ export default function createStore(definition) {
     _.extend(Store.prototype, ListenerMethods, PublisherMethods, StoreMethods, definition);
 
     var store = new Store();
-    Keep.createdStores.push(store);
+
+    if (!definition.dontKeep) {
+      Keep.createdStores.push(store);
+    }
 
     return store;
 }
